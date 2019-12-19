@@ -1218,10 +1218,7 @@ def generate_subnets(prefix, base, subnet_size=50, mask=24):
     r = list()
     for net in range(base, base + subnet_size):
         subnet = "{0}.{1}.0/{2}".format(prefix, net, mask)
-        try:
-            r.append(ipaddress.ip_network(subnet))
-        except ValueError:
-            r.append(ipaddress.ip_network(unicode(subnet)))
+        r.append(ipaddress.ip_network(subnet))
     return r
 
 

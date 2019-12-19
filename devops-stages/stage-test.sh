@@ -29,7 +29,7 @@
 # the vim-emu Docker container by user "root". It requires the container
 # to be started in privileged mode.
 #
-echo "vim-emu stage archive: Not implemented. See stage-pre-test.sh instead."
+echo "vim-emu stage archive: Not implemented. See Post-test stage in Jenkinsfile instead."
 
 
 

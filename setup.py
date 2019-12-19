@@ -26,7 +26,7 @@
 from setuptools import setup, find_packages
 
 setup(name='emuvim',
-      version='6.0',
+      version='7.0',
       license='Apache 2.0',
       description='vim-emu: A NFV multi-PoP emulation platform',
       url='https://osm.etsi.org/gitweb/?p=osm/vim-emu.git',
