@@ -24,51 +24,21 @@
 # acknowledge the contributions of their colleagues of the SONATA
 # partner consortium (www.sonata-nfv.eu).
 
-FROM ubuntu:bionic
+FROM containernet/containernet:latest
 
 ENV SON_EMU_IN_DOCKER 1
 ENV PIP_DEFAULT_TIMEOUT=100
 
-# install required packages
-RUN apt-get clean
-RUN apt-get update \
-    && apt-get install -y  git \
-    net-tools \
-    aptitude \
-    apt-utils \
-    build-essential \
-    libevent-dev \
-    software-properties-common \
-    ansible \
-    curl \
-    iptables \
-    iputils-ping \
-    sudo \
-    wget \
-    python3 \
-    python3-dev \
-    python3-venv \
-    python3-pip
-
-# install containernet (using its Ansible playbook)
-RUN git clone https://github.com/containernet/containernet.git
-
-WORKDIR /containernet/ansible
-RUN ansible-playbook -i "localhost," -c local --skip-tags "notindocker" install.yml
-
 # install emulator (using its Ansible playbook)
+WORKDIR /
 COPY . /vim-emu
 WORKDIR /vim-emu/ansible
 RUN ansible-playbook -i "localhost," -c local --skip-tags "notindocker" install.yml
 WORKDIR /vim-emu
 RUN python3 setup.py develop
 
-# Hotfix: https://github.com/pytest-dev/pytest/issues/4770
-RUN pip3 install "more-itertools<=5.0.0"
-
 # Hotfix: Do not use latest tinyrpc lib, since it breaks Ryu
 RUN pip3 install "tinyrpc==1.0.3"
-
 RUN pip3 install wheel --upgrade
 
 # Important: This entrypoint is required to start the OVS service
