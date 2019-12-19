@@ -45,8 +45,6 @@ RUN apt-get update \
     iputils-ping \
     sudo \
     wget \
-    python \
-    python-pip \
     python3 \
     python3-dev \
     python3-venv \
