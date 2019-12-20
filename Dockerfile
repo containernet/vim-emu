@@ -41,6 +41,11 @@ RUN python3 setup.py develop
 RUN pip3 install "tinyrpc==1.0.3"
 RUN pip3 install wheel --upgrade
 
+# Force python3
+RUN mv /usr/bin/python /usr/bin/python2 && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
+
 # Important: This entrypoint is required to start the OVS service
 ENTRYPOINT ["/vim-emu/utils/docker/entrypoint.sh"]
 CMD ["python3", "examples/default_single_dc_topology.py"]
