@@ -24,6 +24,7 @@
 # acknowledge the contributions of their colleagues of the SONATA
 # partner consortium (www.sonata-nfv.eu).
 
+
 - hosts: localhost
   tasks:
    - name: updates apt
